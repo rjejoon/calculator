@@ -1,5 +1,7 @@
 
-const btns = document.querySelectorAll('.button');
+const btns = document.querySelectorAll('.button-item');
+const output = document.querySelector('#output');
+const eq = document.querySelector('#equation');
 
 
 window.addEventListener('DOMContentLoaded', e => {
@@ -11,11 +13,34 @@ window.addEventListener('DOMContentLoaded', e => {
 });
 
 function btnMouseDownHandler(e) {
-    this.style.backgroundColor = '#f5f5f5';
-    this.style.color = 'black';
+    this.classList.add('whiten');
+
+    // TODO check whether it's valid
+    if (this.classList.contains("clear")) {
+        output.textContent = "";
+        eq.textContent = "";
+    }
+    else if (this.classList.contains("operator")) {
+        output.textContent = "";
+        eq.textContent += " " + this.dataset.value + " ";
+    }
+    else if (this.classList.contains("bracket")) {
+        output.textContent += this.dataset.value;
+        eq.textContent += this.dataset.value;
+    }
+    else if (this.classList.contains("equal")) {
+        // TODO evaluate
+    }
+    else if (this.classList.contains("decimal")) {
+        output.textContent += this.dataset.value;
+        eq.textContent += this.dataset.value;
+    }
+    else if (this.classList.contains("number")) {
+        output.textContent += this.dataset.value;
+        eq.textContent += this.dataset.value;
+    }
 }
 
 function btnMouseUpHandler(e) {
-    this.style.backgroundColor = 'black';
-    this.style.color = 'white';
+    this.classList.remove('whiten');
 }
