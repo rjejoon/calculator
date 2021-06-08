@@ -50,10 +50,12 @@ body {
 
     font-size: 34px;
     color: white;
+
+    transition: background-color 0.2s;
 }
 
 .button:hover {
-    background-color: ;
+    background-color: #808080;
     cursor: pointer;
 
 }
