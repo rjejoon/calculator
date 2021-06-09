@@ -1,7 +1,7 @@
 :root {
-    --main-padding: 15px;
-    --border-color: white;
-    --background-color: black;
+    --main-padding: 20px;
+    --border-color: black;
+    --background-color: #DDDDDD;
     --output-height: 75%;
 }
 
@@ -11,6 +11,11 @@ html {
 }
 
 body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
     height: 100%;
     width: 100%;
 
@@ -19,8 +24,8 @@ body {
     -ms-user-select: none;
     user-select: none;
 
-    font-family: 'Source Sans Pro', sans-serif;
-    color: white;
+    font-family: 'Roboto Mono', monospace;
+    color: black;
 }
 
 #calc-body {
@@ -28,11 +33,18 @@ body {
     flex-flow: column nowrap;
     justify-content: space-between;
 
+    /*height: var(--main-height);*/
+    max-height: 641px;
+    max-width: 380px;
+    width: var(--main-width);
+
     padding: var(--main-padding);
+
     border: 1px solid var(--border-color);
+    border-radius: 15px;
 
     background-color: var(--background-color);
-    color: white;
+    color: black;
 }
 
 #result-area {
@@ -48,7 +60,6 @@ body {
     font-size: 24px;
     letter-spacing: 0.03em;
     text-align: right;
-    background-color: red;
 }
 
 #output {
@@ -62,9 +73,14 @@ body {
 }
 
 #button-grid {
+    width: 340px;
+    height: 418px;
+
     display: grid;
+    justify-items: center;
+    align-items: center;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px 15px;
+    gap: 12px 15px;
 }
 
 .button-item {
@@ -72,14 +88,28 @@ body {
     justify-content: center;
     align-items: center;
 
+    height: 74px;
+    width: 74px;
+
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    box-sizing: border-box;
+    border-radius: 25px;
 
-    font-size: 34px;
-    color: white;
+    font-size: 25px;
 
+    background-color: white;
     transition: background-color 0.25s;
 }
+
+.bracket,
+.operator {
+    background-color: #FFF8B5;
+}
+
+.clear {
+    background-color: #FFB5B5;
+}
+
 
 .button:hover {
     background-color: #808080;
@@ -95,8 +125,6 @@ body {
 @media only screen and (max-width: 600px) {
     #calc-body {
         height: calc(100% - 2 * var(--main-padding));
-        width: calc(100% - 2 * var(--main-padding));
-        border: none;
     }
 
     #result-area {
@@ -104,10 +132,6 @@ body {
         width: 100%;
     }
 
-    #button-grid {
-        height: 65%;
-        width: 100%;
-    }
 }
 
 
