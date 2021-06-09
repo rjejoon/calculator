@@ -103,6 +103,11 @@ body {
     transition: filter 0.25s;
 }
 
+.button-item[disabled] {
+    filter: brightness(50%);
+    pointer-events: none;
+}
+
 .bracket,
 .operator {
     background-color: #FFF8B5;
