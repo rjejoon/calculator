@@ -1,8 +1,6 @@
 :root {
     --main-padding: 20px;
     --border-color: black;
-    --background-color: #DDDDDD;
-    --output-height: 75%;
 }
 
 html {
@@ -33,42 +31,46 @@ body {
     flex-flow: column nowrap;
     justify-content: space-between;
 
-    /*height: var(--main-height);*/
-    max-height: 641px;
-    max-width: 380px;
     width: var(--main-width);
+    max-width: 380px;
+    height: 100%;
+    max-height: 641px;
 
     padding: var(--main-padding);
 
     border: 1px solid var(--border-color);
     border-radius: 15px;
 
-    background-color: var(--background-color);
+    background-color: #dddddd;
     color: black;
 }
 
 #result-area {
+    height: 195px;
+    width: 100%;
+
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
 }
 
 #equation {
-    height: calc(100% - var(--output-height));
+    line-height: 50px;
+    height: 50px; 
     width: 100%;
 
-    font-size: 24px;
-    letter-spacing: 0.03em;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
     text-align: right;
+
+	border-bottom: 1px solid #666565;
 }
 
 #output {
-    /*height: var(--output-height);*/
-    height: 20%;
+    height: 56px;
     width: 100%;
 
     font-size: 56px;
-    letter-spacing: 0.03em;
     text-align: right;
 }
 
@@ -98,7 +100,7 @@ body {
     font-size: 25px;
 
     background-color: white;
-    transition: background-color 0.25s;
+    transition: filter 0.25s;
 }
 
 .bracket,
@@ -111,27 +113,14 @@ body {
 }
 
 
-.button:hover {
-    background-color: #808080;
+.button-item:hover {
+    filter: brightness(85%);
     cursor: pointer;
-
 }
 
-.whiten {
-    background-color: #f5f5f5 !important;
-    color: black;
+.button-item.onclick {
+    filter: brightness(60%);
 }
 
-@media only screen and (max-width: 600px) {
-    #calc-body {
-        height: calc(100% - 2 * var(--main-padding));
-    }
-
-    #result-area {
-        height: calc(35% - var(--main-padding) - 10px);
-        width: 100%;
-    }
-
-}
 
 

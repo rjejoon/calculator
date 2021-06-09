@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', e => {
 });
 
 function btnMouseDownHandler(e) {
-    this.classList.add('whiten');
+    this.classList.add('onclick');
 
     // TODO check whether it's valid
     if (this.classList.contains("clear")) {
@@ -42,5 +42,5 @@ function btnMouseDownHandler(e) {
 }
 
 function btnMouseUpHandler(e) {
-    this.classList.remove('whiten');
+    this.classList.remove('onclick');
 }
