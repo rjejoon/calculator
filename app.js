@@ -54,12 +54,10 @@ function btnMouseDownHandler(e) {
     }
     else if (this.classList.contains("equal")) {
         // TODO evaluate
-        // operate();
         if (output.textContent.length > 0) {
             inputs.push((n.indexOf('.') > -1) ? parseFloat(n) : parseInt(n));
-            output.textContent = "";
         }
-        console.log(inputs);
+        output.textContent = operate();
         inputs = [];
     }
 }
@@ -86,30 +84,52 @@ function resetCalc() {
     inputs = [];
 }
 
-function isValidBracket(b) {
-    // only checks for the validity of the current bracket in inputs
-    
-    if (b === '(') return true;
-
-    let numOpeningBracket = 0;
-    for (const input of inputs) {
-        if (input === '(') numOpeningBracket++;
-        else if (input === ')') numOpeningBracket--;
-    }
-    return numOpeningBracket > 0;
-}
-
 function operate() {
     // Assume input equation is valid
     
-    let foundOpenBracket = false;
-    let ans = null;
+    let ans;
+    let firstOperand = null;
+    let secondOperand = null;
+    let operator = null;
 
-    for (const input of inputs) {
-        
+    while (inputs.length > 1) {
+        operator = findOperatorIndex();
+        firstOperand = inputs[operator-1];
+        secondOperand = inputs[operator+1];
 
-
+        ans = calculate(firstOperand, inputs[operator], secondOperand);
+        inputs.splice(operator-1, 3, ans);
     }
 
-    return ans;
+    return round(inputs[0], 8); // TODO make decimal places responsive
+}
+
+function findOperatorIndex() {
+    let firstOperator = -1;     // return -1 if there is no operator
+
+    for (let i=0; i<inputs.length; i++) {
+        if (inputs[i] === 'x' || inputs[i] === '÷') {
+            return i;
+        }
+        if (inputs[i] === '+' || inputs[i] === '-') {
+            firstOperator = i;
+            break;
+        }
+    }
+    for (let i=firstOperator+1; i<inputs.length; i++) {
+        if (inputs[i] === 'x' || inputs[i] === '÷')     
+            return i;   // multiplication and division take precedence over addition and subtraction
+    }
+    return firstOperator;
+}
+
+function calculate(firstOp, operator, secOp) {
+    if (operator === '+')      return firstOp + secOp; 
+    else if (operator === '-') return firstOp - secOp;
+    else if (operator === 'x') return firstOp * secOp;
+    else if (operator === '÷') return firstOp / secOp;
+}
+
+function round(value, decimals) {
+    return Number(Math.round(value + `e+${decimals}`) + `e-${decimals}`);
 }
