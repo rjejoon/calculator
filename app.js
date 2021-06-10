@@ -77,11 +77,12 @@ function isValidBracket(b) {
     
     if (b === '(') return true;
 
-    let hasOpeningBracket = false;
-    for (const input of reversed) {
-        if (input === '(') return true;
+    let numOpeningBracket = 0;
+    for (const input of inputs) {
+        if (input === '(') numOpeningBracket++;
+        else if (input === ')') numOpeningBracket--;
     }
-    return false;
+    return numOpeningBracket > 0;
 }
 
 function operate() {
