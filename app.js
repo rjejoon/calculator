@@ -26,7 +26,7 @@ function btnMouseDownHandler(e) {
     }
     else if (this.classList.contains("operator")) {
         if (output.textContent.length > 0) {
-            inputs.push((n.indexOf('.') > 0) ? parseFloat(n) : parseInt(n));
+            inputs.push((n.indexOf('.') > -1) ? parseFloat(n) : parseInt(n));
             output.textContent = "";
         }
         inputs.push(val);
@@ -36,7 +36,7 @@ function btnMouseDownHandler(e) {
     }
     else if (this.classList.contains("bracket") && isValidBracket(val)) {
         if (output.textContent.length > 0) {
-            inputs.push((n.indexOf('.') > 0) ? parseFloat(n) : parseInt(n));
+            inputs.push((n.indexOf('.') > -1) ? parseFloat(n) : parseInt(n));
             output.textContent = "";
         }
         inputs.push(val);
@@ -56,7 +56,7 @@ function btnMouseDownHandler(e) {
         // TODO evaluate
         // operate();
         if (output.textContent.length > 0) {
-            inputs.push((n.indexOf('.') > 0) ? parseFloat(n) : parseInt(n));
+            inputs.push((n.indexOf('.') > -1) ? parseFloat(n) : parseInt(n));
             output.textContent = "";
         }
         console.log(inputs);
