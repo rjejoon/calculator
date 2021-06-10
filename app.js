@@ -3,7 +3,7 @@ const btns = document.querySelectorAll('.button-item');
 const output = document.querySelector('#output');
 const eq = document.querySelector('#equation');
 
-const inputs = [];
+let inputs = [];
 
 window.addEventListener('DOMContentLoaded', e => {
     btns.forEach(btn => {
@@ -17,22 +17,29 @@ let isDecimal = false;
 function btnMouseDownHandler(e) {
     this.classList.add('onclick');
 
+    const n = output.textContent;
     const val = this.dataset.value;
+
     // TODO check whether it's valid
     if (this.classList.contains("clear")) {
         resetCalc();
     }
     else if (this.classList.contains("operator")) {
-        let n = output.textContent;
-        output.textContent = "";
-        inputs.push((n.indexOf('.') > 0) ? parseFloat(n) : parseInt(n));
+        if (output.textContent.length > 0) {
+            inputs.push((n.indexOf('.') > 0) ? parseFloat(n) : parseInt(n));
+            output.textContent = "";
+        }
+        inputs.push(val);
         eq.textContent += " " + val + " ";
 
         if (isDecimal) enableDecimalBtn();
     }
     else if (this.classList.contains("bracket") && isValidBracket(val)) {
+        if (output.textContent.length > 0) {
+            inputs.push((n.indexOf('.') > 0) ? parseFloat(n) : parseInt(n));
+            output.textContent = "";
+        }
         inputs.push(val);
-        output.textContent += val;
         eq.textContent += val;
     }
     else if (this.classList.contains("decimal")) {
@@ -48,6 +55,12 @@ function btnMouseDownHandler(e) {
     else if (this.classList.contains("equal")) {
         // TODO evaluate
         // operate();
+        if (output.textContent.length > 0) {
+            inputs.push((n.indexOf('.') > 0) ? parseFloat(n) : parseInt(n));
+            output.textContent = "";
+        }
+        console.log(inputs);
+        inputs = [];
     }
 }
 
@@ -70,6 +83,7 @@ function resetCalc() {
     output.textContent = "";
     eq.textContent = "";
     enableDecimalBtn();
+    inputs = [];
 }
 
 function isValidBracket(b) {
