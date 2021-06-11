@@ -9,6 +9,7 @@ window.addEventListener('DOMContentLoaded', e => {
     btns.forEach(btn => {
         btn.addEventListener('mousedown', btnMouseDownHandler);
         btn.addEventListener('mouseup', btnMouseUpHandler);
+        btn.addEventListener('mouseleave', btnMouseLeaveHandler);
     });
 });
 
@@ -63,6 +64,10 @@ function btnMouseDownHandler(e) {
 }
 
 function btnMouseUpHandler(e) {
+    this.classList.remove('onclick');
+}
+
+function btnMouseLeaveHandler(e) {
     this.classList.remove('onclick');
 }
 
