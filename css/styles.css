@@ -115,7 +115,7 @@ body {
     background-color: #FFF8B5;
 }
 
-.clear {
+.clear, .delete {
     background-color: #FFB5B5;
 }
 
